@@ -1,0 +1,15 @@
+- load imagekit
+.image-widget
+    - if value
+        .image-widget-preview
+            - thumbnail thumbnail_preset value
+        .image-widget-input
+            = input
+        .image-widget-clear
+            - if not field.is_required
+                %label{for: '{{ checkbox_id }}'}
+                    %input{type: 'checkbox', id: '{{ checkbox_id }}', name: '{{ checkbox_name }}'}
+                    Убрать картинку
+    - else
+        .image-widget-input-alone
+            = input

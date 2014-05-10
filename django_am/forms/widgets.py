@@ -1,6 +1,7 @@
 #--coding: utf8--
 
 from django import forms
+from django.template.loader import render_to_string
 
 
 class SelectDateWidget(forms.DateInput):
@@ -39,3 +40,25 @@ class CKEditorWidget(forms.Textarea):
             self.attrs['class'] += ' ckeditor'
         else:
             self.attrs['class'] = 'ckeditor'
+
+
+class ImagePreviewWidget(forms.ClearableFileInput):
+    """
+    Виджет загрузки картинки с ее превью.
+    """
+    template_name = 'django_am/image_preview_widget.html'
+    thumbnail_preset = '50x50'
+
+    def render(self, name, value, attrs=None):
+        context = dict(
+            input=forms.FileInput.render(self, name, value, attrs),
+            field=self,
+            name=name,
+            value=value,
+            attrs=attrs,
+            thumbnail_preset=self.thumbnail_preset,
+            checkbox_name=self.clear_checkbox_name(name),
+        )
+        context.update(
+            checkbox_id=self.clear_checkbox_id(context['checkbox_name']))
+        return render_to_string(self.template_name, context)

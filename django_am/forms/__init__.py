@@ -1,4 +1,4 @@
 #--coding: utf8--
 
 
-from widgets import SelectDateWidget, CKEditorWidget  # NOQA
+from widgets import SelectDateWidget, CKEditorWidget, ImagePreviewWidget  # NOQA
