@@ -1,0 +1,2 @@
+recursive-include django_am/templates *.haml
+recursive-include django_am/static *
